@@ -1,4 +1,4 @@
-import { IParticipantDetails } from "./components/inputParticipants/types";
+import { IParticipantDetails } from "./types";
 import { create } from "zustand";
 
 interface ISecretSantaStore {

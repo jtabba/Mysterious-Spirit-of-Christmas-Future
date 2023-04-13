@@ -1,6 +1,6 @@
-const webpack = require("webpack");
-const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+const path = require("path");
 
 process.env.NODE_ENV = "development";
 
@@ -8,7 +8,7 @@ module.exports = {
 	mode: "development",
 	target: "web",
 	devtool: "cheap-module-source-map",
-	entry: "./src/index.tsx",
+	entry: "./src/App.tsx",
 	output: {
 		path: path.resolve(__dirname, "build"),
 		publicPath: "auto",
@@ -24,7 +24,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: "src/index.html"
 			// favicon: "src/favicon.ico"
-		})
+		}),
+		new Dotenv()
 	],
 	module: {
 		rules: [

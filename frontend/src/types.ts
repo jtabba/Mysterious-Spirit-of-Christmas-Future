@@ -3,7 +3,7 @@ import { Control, FieldErrors } from "react-hook-form";
 export interface IParticipantDetails {
 	name: string;
 	email: string;
-	id?: string;
+	id: string;
 }
 
 export interface IParticipantDetailsValidation {

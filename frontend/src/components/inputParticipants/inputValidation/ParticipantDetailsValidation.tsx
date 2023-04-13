@@ -1,4 +1,7 @@
-import { IParticipantDetails, IParticipantDetailsValidation } from "../types";
+import {
+	IParticipantDetails,
+	IParticipantDetailsValidation
+} from "../../../types";
 import { useInputUtils } from "../useInputUtils";
 import { Input, Text } from "@chakra-ui/react";
 import { Controller } from "react-hook-form";

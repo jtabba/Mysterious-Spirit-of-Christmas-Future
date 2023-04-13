@@ -1,4 +1,4 @@
-import { IParticipantDetails } from "../types";
+import { IParticipantDetails } from "../../../types";
 import Joi from "joi";
 
 export const ParticipantsSchema = Joi.object<IParticipantDetails>({

@@ -1,7 +1,7 @@
 import { ParticipantsSchema } from "./inputValidation/schema";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useSecretSantaStore } from "../../store";
-import { IParticipantDetails } from "./types";
+import { IParticipantDetails } from "../../types";
 import { useForm } from "react-hook-form";
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
@@ -16,7 +16,8 @@ export const useInputUtils = () => {
 
 	const defaultValues: IParticipantDetails = {
 		name: "",
-		email: ""
+		email: "",
+		id: ""
 	};
 
 	const [participantDetails, setParticipantDetails] =

@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"target": "es6",
+		"allowJs": true,
+		"esModuleInterop": true,
+		"lib": ["es2021"],
+		"module": "ES6",
+		"moduleResolution": "node",
+		"rootDir": "./src",
+		"outDir": "./dist",
+		"noEmit": true,
+		"strict": true,
+		"allowImportingTsExtensions": true
+	},
+	"exclude": ["./node_modules"]
+}
