@@ -3,8 +3,9 @@ import {
 	IParticipantDetailsValidation
 } from "../../../types";
 import { useInputUtils } from "../useInputUtils";
-import { Input, Text } from "@chakra-ui/react";
 import { Controller } from "react-hook-form";
+import { TextError } from "../../../styles";
+import { Input } from "@chakra-ui/react";
 import { FC } from "react";
 
 export const ParticipantDetailsValidation: FC<
@@ -33,10 +34,9 @@ export const ParticipantDetailsValidation: FC<
 								event.target.value
 							);
 						}}
+						color="primary.yellow"
 					/>
-					<Text height={4} color="red.600" fontWeight={500}>
-						{errorMessage}
-					</Text>
+					<TextError error={errorMessage} />
 				</>
 			)}
 		/>

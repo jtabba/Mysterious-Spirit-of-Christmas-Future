@@ -19,7 +19,7 @@ interface ISubmitAlertDialog {
 	setClosed: () => void;
 }
 
-export const SubmitAlertDialog: FC<ISubmitAlertDialog> = ({
+export const SubmissionAlertDialog: FC<ISubmitAlertDialog> = ({
 	isOpen,
 	setClosed
 }) => {

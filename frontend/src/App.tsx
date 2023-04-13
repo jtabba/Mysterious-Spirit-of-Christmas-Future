@@ -1,25 +1,16 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { AppSnowflakeBackground } from "./components/background/AppSnowflakeBackground";
+import { AppMainBody } from "./components/mainBody/AppMainBody";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 import { customTheme } from "./theme/theme";
 import { render } from "react-dom";
-import "./index.css";
-import { SnowflakeBackground } from "./components/background/SnowflakeBackground";
-import { Box, Container } from "@chakra-ui/react";
-import { MainBody } from "./components/mainBody/MainBody";
+import "./App.css";
 
 const App = () => (
 	<Box maxWidth="100%" maxHeight="100%" position="relative">
-		<SnowflakeBackground />
-		<Container
-			width="80Rem"
-			height="50rem"
-			position="relative"
-			top="6rem"
-			margin="0 auto"
-		>
-			<ChakraProvider theme={customTheme}>
-				<MainBody />
-			</ChakraProvider>
-		</Container>
+		<AppSnowflakeBackground />
+		<ChakraProvider theme={customTheme}>
+			<AppMainBody />
+		</ChakraProvider>
 	</Box>
 );
 

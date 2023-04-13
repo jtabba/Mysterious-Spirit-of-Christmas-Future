@@ -1,5 +1,7 @@
 import { ParticipantDetailsValidation } from "./inputValidation/ParticipantDetailsValidation";
-import { Stack, Button, Text, Divider } from "@chakra-ui/react";
+import { DividerYellow, MainBodySegment, TextMedium } from "../../styles";
+import { Stack, Button } from "@chakra-ui/react";
+import { customTheme } from "../../theme/theme";
 import { useInputUtils } from "./useInputUtils";
 
 export const InputParticipants = () => {
@@ -13,9 +15,10 @@ export const InputParticipants = () => {
 	} = useInputUtils();
 
 	return (
-		<Stack justifyItems="left" width="45%" spacing="1rem">
-			<Text fontSize="2xl">Add participants' details</Text>
-			<Divider borderColor="gray.200" />
+		<MainBodySegment>
+			<TextMedium text={"Add them here!"} />
+			<DividerYellow />
+
 			<ParticipantDetailsValidation
 				control={control}
 				inputValue={participantDetails.name}
@@ -30,7 +33,8 @@ export const InputParticipants = () => {
 				errors={errors}
 				handleChange={handleChange}
 			/>
-			<Divider borderColor="gray.200" />
+			<DividerYellow />
+
 			<Button
 				colorScheme="red"
 				size="md"
@@ -39,6 +43,6 @@ export const InputParticipants = () => {
 			>
 				Add Participant
 			</Button>
-		</Stack>
+		</MainBodySegment>
 	);
 };

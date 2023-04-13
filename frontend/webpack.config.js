@@ -22,8 +22,8 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "src/index.html"
-			// favicon: "src/favicon.ico"
+			template: "src/App.html",
+			favicon: "src/logo/logo-color.svg"
 		}),
 		new Dotenv()
 	],
