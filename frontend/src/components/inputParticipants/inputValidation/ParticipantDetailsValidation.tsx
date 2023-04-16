@@ -4,7 +4,7 @@ import {
 } from "../../../types";
 import { useInputUtils } from "../useInputUtils";
 import { Controller } from "react-hook-form";
-import { TextError } from "../../../styles";
+import { InputValidation, TextError } from "../../../styles";
 import { Input } from "@chakra-ui/react";
 import { FC } from "react";
 
@@ -22,7 +22,7 @@ export const ParticipantDetailsValidation: FC<
 			control={control}
 			render={({ field }) => (
 				<>
-					<Input
+					<InputValidation
 						{...field}
 						placeholder={formatPlaceholder(participantDetailsKey)}
 						type="string"

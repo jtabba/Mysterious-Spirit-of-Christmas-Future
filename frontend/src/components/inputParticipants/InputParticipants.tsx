@@ -1,15 +1,14 @@
 import { ParticipantDetailsValidation } from "./inputValidation/ParticipantDetailsValidation";
 import { DividerYellow, MainBodySegment, TextMedium } from "../../styles";
-import { Stack, Button } from "@chakra-ui/react";
-import { customTheme } from "../../theme/theme";
 import { useInputUtils } from "./useInputUtils";
+import { Button } from "@chakra-ui/react";
 
 export const InputParticipants = () => {
 	const {
 		control,
-		participantDetails,
 		errors,
 		isSubmitDisabled,
+		participantDetails,
 		handleChange,
 		addParticipant
 	} = useInputUtils();

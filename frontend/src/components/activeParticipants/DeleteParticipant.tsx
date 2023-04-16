@@ -1,7 +1,8 @@
-import { Button, HStack } from "@chakra-ui/react";
+import { Button, ButtonGroup, HStack } from "@chakra-ui/react";
 import { IParticipantDetails } from "../../types";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { FC, useState } from "react";
+import { themeWhite } from "../../theme/theme";
 
 interface IDeleteParticipant {
 	participants: IParticipantDetails[];
@@ -27,24 +28,22 @@ export const DeleteParticipant: FC<IDeleteParticipant> = ({
 	return (
 		<>
 			{deleteActive ? (
-				<HStack>
+				<ButtonGroup size="xs">
 					<Button
 						colorScheme="red"
-						border="1px solid #f5f5f5"
-						size="xs"
+						border={`1px solid ${themeWhite}`}
 						onClick={handleDelete}
 					>
 						Delete
 					</Button>
 					<Button
 						colorScheme="green"
-						border="1px solid #f5f5f5"
-						size="xs"
+						border={`1px solid ${themeWhite}`}
 						onClick={() => setDeleteActive(!deleteActive)}
 					>
 						Cancel
 					</Button>
-				</HStack>
+				</ButtonGroup>
 			) : (
 				<DeleteIcon
 					color="primary.yellow"

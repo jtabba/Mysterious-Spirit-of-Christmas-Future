@@ -1,7 +1,8 @@
 import { MainBodyContainer } from "../../styles";
 import { ActiveParticipants } from "../activeParticipants/ActiveParticipants";
 import { InputParticipants } from "../inputParticipants/InputParticipants";
-import { Stack, Image, Text } from "@chakra-ui/react";
+import { Stack, Image, Text, Button } from "@chakra-ui/react";
+import { SnowControllButton } from "../snowControl";
 
 export const AppMainBody = () => (
 	<>
@@ -11,6 +12,7 @@ export const AppMainBody = () => (
 			alt=""
 		/>
 		<MainBodyContainer>
+			<SnowControllButton />
 			<Text
 				fontSize="5xl"
 				align="center"

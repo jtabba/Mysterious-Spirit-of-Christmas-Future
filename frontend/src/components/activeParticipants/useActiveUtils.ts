@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import ParticipantsDetailsService from "../../../controllers/participantsDetailsController";
 import { useSecretSantaStore } from "../../store";
 import { useDisclosure } from "@chakra-ui/react";
+import { SecretSantaProvider } from "../../../services/secretSantaService/useSecretSantaService";
 
 export const useActiveUtils = () => {
 	const { participants, setParticipants } = useSecretSantaStore(
@@ -18,7 +18,7 @@ export const useActiveUtils = () => {
 
 	const [emailMessage, setEmailMessage] =
 		useState<string>(defaultEmailMessage);
-	const _participantsDetailsService = new ParticipantsDetailsService();
+	const { postSecretSantaData } = SecretSantaProvider();
 
 	const isSubmitActive = participants.length === 0;
 
@@ -30,11 +30,11 @@ export const useActiveUtils = () => {
 		emailMessage,
 		isSubmitActive,
 		defaultEmailMessage,
-		_participantsDetailsService,
 		setOpen,
 		setBudget,
 		setClosed,
 		setEmailMessage,
-		setParticipants
+		setParticipants,
+		postSecretSantaData
 	};
 };

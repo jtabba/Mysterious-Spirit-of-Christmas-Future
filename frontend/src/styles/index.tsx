@@ -3,10 +3,13 @@ import {
 	Container,
 	ContainerProps,
 	Divider,
-	Text
-	// ComponentStyleConfig,
-	// SystemStyleFunction
+	Text,
+	Input,
+	InputProps,
+	Button,
+	ButtonProps
 } from "@chakra-ui/react";
+import { themeYellow, darkGreen, themeWhite } from "../theme/theme";
 
 export const DividerYellow = () => (
 	<Divider borderColor="primary.yellow" borderBottomWidth={2} />
@@ -35,7 +38,7 @@ export const MainBodyContainer = forwardRef<ContainerProps, "div">(
 			margin="0 auto"
 			bg="primary.green"
 			borderRadius={10}
-			border="4px solid #E6BC00"
+			border={`4px solid ${themeYellow}`}
 			display="flex"
 			flexDirection="column"
 			gap={35}
@@ -58,15 +61,52 @@ export const MainBodySegment = forwardRef<ContainerProps, "div">(
 	)
 );
 
-// export const MainBodyContainer: SystemStyleFunction = () => {
-// 	return {
-// 		width: "32rem",
-// 		display: "flex",
-// 		flexDirection: "column",
-// 		gap: "1rem"
-// 	};
-// };
+export const InputValidation = forwardRef<InputProps, "input">((props, ref) => (
+	<Input
+		variant="outlined"
+		_placeholder={{ color: "primary.white" }}
+		bg={darkGreen}
+		_hover={{
+			boxShadow: `0 0 0 1px ${themeYellow}`
+		}}
+		_focus={{
+			boxShadow: `0 0 0 1px ${themeYellow}`,
+			color: "primary.white"
+		}}
+		_autofill={{
+			backgroundColor: "green.700",
+			boxShadow: `0 0 0 1000px ${darkGreen} inset, 0 0 0 1px ${themeYellow}`,
+			transition: "background-color 5000s ease-in-out 0s",
+			textFillColor: "#f5f5f5"
+		}}
+		ref={ref}
+		{...props}
+	/>
+));
 
-// export const MainBodySegment = () => (
-// 	<Container width="32rem" display="flex" flexDirection="column" gap="1rem" />
-// );
+export const SnowControlButton = forwardRef<ButtonProps, typeof Button>(
+	(props, ref) => (
+		<Button
+			colorScheme="red"
+			size="sm"
+			width={8}
+			maxHeight={8}
+			padding={2}
+			border={`1px solid ${themeWhite}`}
+			ref={ref}
+			{...props}
+		/>
+	)
+);
+
+export const SnowButton = forwardRef<ButtonProps, "div">((props, ref) => (
+	<Button
+		colorScheme="gray"
+		color="red"
+		size="sm"
+		width={8}
+		maxHeight={8}
+		ref={ref}
+		{...props}
+	/>
+));
