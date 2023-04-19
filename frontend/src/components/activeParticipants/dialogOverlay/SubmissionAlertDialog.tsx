@@ -1,77 +1,64 @@
+import { useSecretSantaService } from "../../../../services/secretSantaService/useSecretSantaService";
+import { useActiveUtils } from "../utils/useActiveUtils";
+import { SetEmailMessage } from "../SetEmailMessage";
+import { SpinnerYellow } from "../../../styles";
+import { SetBudget } from "../SetBudget";
+import { FC } from "react";
 import {
-	AlertDialog,
-	AlertDialogBody,
-	AlertDialogFooter,
-	AlertDialogHeader,
 	AlertDialogContent,
 	AlertDialogOverlay,
-	Input,
-	Button,
-	Divider
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogBody,
+	AlertDialog,
+	Divider,
+	Button
 } from "@chakra-ui/react";
-import { FC } from "react";
-import { useActiveUtils } from "./useActiveUtils";
-import { SetEmailMessage } from "./SetEmailMessage";
-import { SetBudget } from "./SetBudget";
 
-interface ISubmitAlertDialog {
+export interface ISubmissionAlertDialog {
 	isOpen: boolean;
 	setClosed: () => void;
 }
 
-export const SubmitAlertDialog: FC<ISubmitAlertDialog> = ({
+export const SubmissionAlertDialog: FC<ISubmissionAlertDialog> = ({
 	isOpen,
 	setClosed
 }) => {
 	const {
-		participants: participantsDetails,
-		_participantsDetailsService,
-		emailMessage,
-		budget,
 		defaultEmailMessage,
+		participantsDetails,
+		emailMessage,
+		isLoading,
 		cancelRef,
+		budget,
 		setBudget,
 		setEmailMessage
 	} = useActiveUtils();
-
-	const postParticipantsDetails = async (): Promise<void> => {
-		await _participantsDetailsService
-			.postData(
-				{
-					participantsDetails,
-					emailMessage,
-					budget
-				},
-				"participants/send"
-			)
-			.then((res) => {
-				setClosed();
-				return res;
-			});
-	};
+	const { postParticipantsDetails } = useSecretSantaService();
 
 	return (
-		<>
-			<AlertDialog
-				isOpen={isOpen}
-				leastDestructiveRef={cancelRef}
-				closeOnEsc={true}
-				closeOnOverlayClick={true}
-				isCentered={true}
-				onClose={setClosed}
-				returnFocusOnClose={true}
-			>
-				<AlertDialogOverlay>
+		<AlertDialog
+			isOpen={isOpen}
+			closeOnEsc={true}
+			isCentered={true}
+			onClose={setClosed}
+			returnFocusOnClose={true}
+			closeOnOverlayClick={true}
+			leastDestructiveRef={cancelRef}
+		>
+			<AlertDialogOverlay>
+				{isLoading ? (
+					<SpinnerYellow />
+				) : (
 					<AlertDialogContent maxWidth="62rem" maxHeight="38rem">
 						<AlertDialogHeader
-							alignItems="center"
 							fontSize="3xl"
 							fontWeight="bold"
+							alignItems="center"
 						>
 							Finalise your submission!
 						</AlertDialogHeader>
-
-						<Divider colorScheme="grey.800" />
+						<Divider />
 
 						<AlertDialogBody
 							rowGap="20px"
@@ -81,13 +68,17 @@ export const SubmitAlertDialog: FC<ISubmitAlertDialog> = ({
 							overflow="scroll"
 						>
 							<SetBudget budget={budget} setBudget={setBudget} />
-							<Divider colorScheme="grey.800" />
+
+							<Divider />
+
 							<SetEmailMessage
 								budget={budget}
 								emailMessage={emailMessage}
 								setEmailMessage={setEmailMessage}
 								defaultEmailMessage={defaultEmailMessage}
 							/>
+
+							<Divider />
 						</AlertDialogBody>
 
 						<AlertDialogFooter>
@@ -100,7 +91,15 @@ export const SubmitAlertDialog: FC<ISubmitAlertDialog> = ({
 							</Button>
 							<Button
 								colorScheme="green"
-								onClick={postParticipantsDetails}
+								onClick={(event) => {
+									event.preventDefault();
+
+									postParticipantsDetails({
+										participantsDetails,
+										emailMessage,
+										budget
+									});
+								}}
 								ml={3}
 								isDisabled={Number(budget) <= 0}
 							>
@@ -108,8 +107,8 @@ export const SubmitAlertDialog: FC<ISubmitAlertDialog> = ({
 							</Button>
 						</AlertDialogFooter>
 					</AlertDialogContent>
-				</AlertDialogOverlay>
-			</AlertDialog>
-		</>
+				)}
+			</AlertDialogOverlay>
+		</AlertDialog>
 	);
 };

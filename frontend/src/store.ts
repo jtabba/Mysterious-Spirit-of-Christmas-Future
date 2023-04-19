@@ -2,12 +2,16 @@ import { IParticipantDetails } from "./types";
 import { create } from "zustand";
 
 interface ISecretSantaStore {
-	participants: IParticipantDetails[];
-	setParticipants: (participants: IParticipantDetails[]) => void;
+	snowRate: number;
+	participantsDetails: IParticipantDetails[];
+	setSnowRate: (value: number) => void;
+	setParticipantsDetails: (newParticipants: IParticipantDetails[]) => void;
 }
 
 export const useSecretSantaStore = create<ISecretSantaStore>((set) => ({
-	participants: [],
-	setParticipants: (participants: IParticipantDetails[]) =>
-		set(() => ({ participants }))
+	snowRate: 100,
+	participantsDetails: [],
+	setSnowRate: (value: number) => set(() => ({ snowRate: value })),
+	setParticipantsDetails: (newParticipantsDetails: IParticipantDetails[]) =>
+		set(() => ({ participantsDetails: newParticipantsDetails }))
 }));

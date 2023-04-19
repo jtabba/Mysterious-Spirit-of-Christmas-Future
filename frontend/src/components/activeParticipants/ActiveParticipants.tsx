@@ -1,43 +1,42 @@
-import { Stack, HStack, Text, Box, Button, Divider } from "@chakra-ui/react";
-import { useActiveUtils } from "./useActiveUtils";
+import { SubmissionAlertDialog } from "./dialogOverlay/SubmissionAlertDialog";
+import { DividerYellow, MainBodySegment, TextMedium } from "../../styles";
+import { Stack, HStack, Text, Button } from "@chakra-ui/react";
+import { useActiveUtils } from "./utils/useActiveUtils";
 import { DeleteParticipant } from "./DeleteParticipant";
-import { SubmitAlertDialog } from "./SubmitAlertDialog";
 
 export const ActiveParticipants = () => {
 	const {
-		isOpen,
-		participants,
+		participantsDetails,
 		isSubmitActive,
+		isOpen,
 		setOpen,
 		setClosed,
-		setParticipants
+		setParticipantsDetails
 	} = useActiveUtils();
 
 	return (
-		<Stack justify="right" width="45%" spacing="1rem">
-			<SubmitAlertDialog isOpen={isOpen} setClosed={setClosed} />
-			<Text fontSize="2xl">Who made the cut?</Text>
-			<Divider borderColor="gray.200" />
-			<Stack h="25rem" width="90%" overflowY="scroll">
-				{participants.map(({ name, email, id }, index) => (
+		<MainBodySegment>
+			<SubmissionAlertDialog isOpen={isOpen} setClosed={setClosed} />
+
+			<TextMedium text={"The Nice List 🎁"} />
+			<DividerYellow />
+
+			<Stack h="16rem" w="30rem" overflowY="scroll">
+				{participantsDetails.map(({ name, email, id }, index) => (
 					<HStack justifyContent="space-between" key={id}>
-						<Box>
-							<Text fontSize="xl" marginLeft={15} color="red.600">
-								{index + 1}. {name}
-							</Text>
-							<Text fontSize="lg" marginLeft={30} color="red.600">
-								{email}
-							</Text>
-						</Box>
+						<Text fontSize="xl" color="primary.white">
+							{index + 1}) {name} ({email})
+						</Text>
 						<DeleteParticipant
 							participantId={id}
-							participants={participants}
-							setParticipants={setParticipants}
+							participants={participantsDetails}
+							setParticipants={setParticipantsDetails}
 						/>
 					</HStack>
 				))}
 			</Stack>
-			<Divider borderColor="gray.200" />
+
+			<DividerYellow />
 			<Button
 				colorScheme="red"
 				size="md"
@@ -46,6 +45,6 @@ export const ActiveParticipants = () => {
 			>
 				Submit Participants
 			</Button>
-		</Stack>
+		</MainBodySegment>
 	);
 };

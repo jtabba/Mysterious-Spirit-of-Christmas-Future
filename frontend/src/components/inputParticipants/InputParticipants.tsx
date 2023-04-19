@@ -1,44 +1,43 @@
 import { ParticipantDetailsValidation } from "./inputValidation/ParticipantDetailsValidation";
-import { Stack, Button, Text, Divider } from "@chakra-ui/react";
-import { useInputUtils } from "./useInputUtils";
+import { DividerYellow, MainBodySegment, TextMedium } from "../../styles";
+import { useInputUtils } from "./utils/useInputUtils";
+import { Button } from "@chakra-ui/react";
 
 export const InputParticipants = () => {
-	const {
-		control,
-		participantDetails,
-		errors,
-		isSubmitDisabled,
-		handleChange,
-		addParticipant
-	} = useInputUtils();
+	const { control, errors, isDirty, isValid, addParticipant } =
+		useInputUtils();
 
 	return (
-		<Stack justifyItems="left" width="45%" spacing="1rem">
-			<Text fontSize="2xl">Add participants' details</Text>
-			<Divider borderColor="gray.200" />
+		<MainBodySegment>
+			<TextMedium text={"Add them here!"} />
+			<DividerYellow />
+
 			<ParticipantDetailsValidation
 				control={control}
-				inputValue={participantDetails.name}
+				fieldName={"name"}
 				participantDetailsKey={"name"}
 				errors={errors}
-				handleChange={handleChange}
 			/>
 			<ParticipantDetailsValidation
 				control={control}
-				inputValue={participantDetails.email}
+				fieldName={"email"}
 				participantDetailsKey={"email"}
 				errors={errors}
-				handleChange={handleChange}
 			/>
-			<Divider borderColor="gray.200" />
+
+			<DividerYellow />
 			<Button
 				colorScheme="red"
 				size="md"
-				isDisabled={isSubmitDisabled}
-				onClick={addParticipant}
+				type="submit"
+				isDisabled={!isDirty || !isValid}
+				onClick={(event) => {
+					event.preventDefault();
+					addParticipant();
+				}}
 			>
 				Add Participant
 			</Button>
-		</Stack>
+		</MainBodySegment>
 	);
 };
