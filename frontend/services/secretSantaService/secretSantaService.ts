@@ -1,56 +1,52 @@
+import { ENCRYPTION_PASSPHRASE } from "../../src/constants";
+import { IParticipantDetails } from "../../src/types";
+import { useAxios } from "../fetchData";
+import { AxiosResponse } from "axios";
+import CryptoJs from "crypto-js";
 import {
-	ISecretSantaPostBody,
-	ISecretSantaRequest,
-	ISecretSantaService,
-	ISecretSantaResponse,
-	SecretSantaApiEndpoints
+	EncryptedSecretSantaPostBody,
+	SecretSantaApiEndpoints,
+	ISecretSantaPostBody
 } from "./types";
 
-class SecretSantaService implements ISecretSantaService {
-	fetchData: <T>(
-		endpoint: string,
-		options: ISecretSantaRequest
-	) => Promise<T>;
+export const secretSantaService = () => {
+	const { fetchData } = useAxios();
 
-	constructor(
-		fetchData: <T>(
-			endpoint: string,
-			options: ISecretSantaRequest
-		) => Promise<T>
-	) {
-		this.fetchData = fetchData;
-	}
+	const encryptParticipantsDetails = (
+		participantsDetails: IParticipantDetails[]
+	) => {
+		const encryptedParticipantsDetails = CryptoJs.AES.encrypt(
+			JSON.stringify(participantsDetails),
+			ENCRYPTION_PASSPHRASE
+		).toString();
 
-	private async postRequest<T = unknown>(
-		endpoint: string,
-		body: object
-		// options: object = {} // use when JWT added
-	) {
-		return this.fetchData<T>(endpoint, {
-			method: "POST",
-			body: JSON.stringify(body),
-			headers: {
-				"Content-Type": "application/json"
-			}
-			// ...options
-		});
-	}
+		return encryptedParticipantsDetails;
+	};
 
-	async postSecretSantaData(
+	const postSecretSantaData = async (
 		requestBody: ISecretSantaPostBody
-	): Promise<ISecretSantaResponse | null> {
-		try {
-			const response: ISecretSantaResponse =
-				await this.postRequest<ISecretSantaResponse>(
-					SecretSantaApiEndpoints.PostSecretSantas,
-					{ ...requestBody }
-				);
+	): Promise<AxiosResponse | null> => {
+		const encryptedParticipantsDetails: EncryptedSecretSantaPostBody =
+			encryptParticipantsDetails(requestBody.participantsDetails);
 
-			return response ?? null;
-		} catch (error) {
-			throw new Error("Failed to post participants' details");
-		}
-	}
-}
+		const response: AxiosResponse | null = await fetchData(
+			SecretSantaApiEndpoints.PostSecretSantas,
+			{
+				method: "POST",
+				body: JSON.stringify({
+					...requestBody,
+					participantsDetails: encryptedParticipantsDetails
+				}),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		);
 
-export default SecretSantaService;
+		return response;
+	};
+
+	return {
+		postSecretSantaData
+	};
+};

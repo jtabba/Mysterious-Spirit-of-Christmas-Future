@@ -1,8 +1,8 @@
-import { Button, ButtonGroup, HStack } from "@chakra-ui/react";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 import { IParticipantDetails } from "../../types";
+import { themeWhite } from "../../theme/theme";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { FC, useState } from "react";
-import { themeWhite } from "../../theme/theme";
 
 interface IDeleteParticipant {
 	participants: IParticipantDetails[];

@@ -1,3 +1,4 @@
+import { themeYellow, darkGreen, themeWhite } from "../theme/theme";
 import {
 	forwardRef,
 	Container,
@@ -7,12 +8,17 @@ import {
 	Input,
 	InputProps,
 	Button,
-	ButtonProps
+	ButtonProps,
+	SpinnerProps,
+	Spinner
 } from "@chakra-ui/react";
-import { themeYellow, darkGreen, themeWhite } from "../theme/theme";
 
 export const DividerYellow = () => (
 	<Divider borderColor="primary.yellow" borderBottomWidth={2} />
+);
+
+export const DividerGrey = () => (
+	<Divider borderColor="grey.800" borderBottomWidth={2} />
 );
 
 export const TextMedium = ({ text }: { text: string }) => (
@@ -92,7 +98,7 @@ export const SnowControlButton = forwardRef<ButtonProps, typeof Button>(
 			width={8}
 			maxHeight={8}
 			padding={2}
-			border={`1px solid ${themeWhite}`}
+			border={`2px solid ${themeWhite}`}
 			ref={ref}
 			{...props}
 		/>
@@ -106,6 +112,22 @@ export const SnowButton = forwardRef<ButtonProps, "div">((props, ref) => (
 		size="sm"
 		width={8}
 		maxHeight={8}
+		ref={ref}
+		{...props}
+	/>
+));
+
+export const SpinnerYellow = forwardRef<SpinnerProps, "div">((props, ref) => (
+	<Spinner
+		margin="0 auto"
+		color="primary.yellow"
+		style={{
+			position: "fixed",
+			top: "50%",
+			left: "50%",
+			transform: "translate(-50%, -50%)"
+		}}
+		size="xl"
 		ref={ref}
 		{...props}
 	/>

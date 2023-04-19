@@ -1,86 +1,53 @@
-import SecretSantaService from "./secretSantaService";
-import {
-	ISecretSantaPostBody,
-	ISecretSantaResponse,
-	ISecretSantaService
-} from "./types";
-import { createContext, FC, useContext, useMemo } from "react";
-import { PropsWithChildren } from "react";
-import { useAxios } from "../fetchData";
-import { IParticipantDetails } from "../../src/types";
+import { useNotification } from "../../src/components/activeParticipants/dialogOverlay/useNotification";
+import { useActiveUtils } from "../../src/components/activeParticipants/utils/useActiveUtils";
+import { secretSantaService } from "./secretSantaService";
+import { ISecretSantaPostBody } from "./types";
 import { useMutation } from "react-query";
-// import auth
+import { AxiosError } from "axios";
 
-interface IUseSecretSantaContext {
-	postSecretSantaData: (
-		requestBody: ISecretSantaPostBody
-	) => Promise<ISecretSantaResponse | null>;
-}
-
-const SecretSantaContext = createContext<IUseSecretSantaContext | undefined>(
-	undefined
-);
-
-const SecretSantaProvider = () => {
-	const { fetchData } = useAxios();
-	const secretSantaService = new SecretSantaService(fetchData);
-
-	// const postSecretSantaData = async(participantsDetails: IParticipantDetails[], emailMessage: string, budget: string) => {
-	//     try {
-	//         const requestBody: ISecretSantaPostBody = {
-	//             participantsDetails,
-	//             emailMessage,
-	//             budget
-	//         }
-	//         const response = secretSantaService.postSecretSantaData(requestBody)
-
-	//         return response
-	//     } catch(err) {
-	//         console.log(err + "(postSecretSantaData")
-
-	//         return null
-	//     }
-	// }
+const useSecretSantaService = () => {
+	const { postSecretSantaData } = secretSantaService();
+	const { setIsLoading, setClosed } = useActiveUtils();
+	const { renderNotification } = useNotification();
 
 	const createSecretSantaDataMutation = useMutation(
 		async (requestBody: ISecretSantaPostBody) => {
-			return secretSantaService.postSecretSantaData(requestBody);
+			setIsLoading(true);
+
+			return postSecretSantaData(requestBody);
 		},
 		{
-			onError: (err) => console.log(err),
-			onSuccess: (data) => console.log(data)
+			onSuccess: (response: any) => {
+				setIsLoading(false);
+				setClosed();
+
+				renderNotification(response.data);
+			},
+			onError: (error: any) => {
+				setIsLoading(false);
+				setClosed();
+
+				if (error instanceof AxiosError) {
+					renderNotification(error.response!.data);
+				} else {
+					renderNotification({
+						message:
+							"An unexpected error has occured - please try again",
+						status: 400
+					});
+				}
+
+				throw new Error(error);
+			}
 		}
 	);
 
-	const postSecretSantaData = async (requestBody: ISecretSantaPostBody) => {
-		return createSecretSantaDataMutation.mutateAsync(requestBody);
-	};
+	const postParticipantsDetails = async (requestBody: ISecretSantaPostBody) =>
+		createSecretSantaDataMutation.mutateAsync(requestBody);
 
 	return {
-		postSecretSantaData
+		postParticipantsDetails
 	};
-
-	// const secretSantaContextValue = useMemo(
-	// 	() => ({
-	// 		postSecretSantaData
-	// 	}),
-	// 	[]
-	// );
-
-	// return (
-	// 	<SecretSantaContext.Provider value={secretSantaContextValue}>
-	// 		{children}
-	// 	</SecretSantaContext.Provider>
-	// );
 };
 
-// const useSecretSanta = () => {
-// 	const context = useContext(SecretSantaContext);
-
-// 	return context;
-// };
-
-export {
-	SecretSantaProvider
-	// useSecretSanta
-};
+export { useSecretSantaService };

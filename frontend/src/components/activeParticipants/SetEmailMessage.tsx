@@ -1,12 +1,5 @@
-import {
-	VStack,
-	Text,
-	Textarea,
-	Switch,
-	Divider,
-	HStack
-} from "@chakra-ui/react";
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { VStack, Text, Textarea, Switch, HStack } from "@chakra-ui/react";
 
 interface ISetEmailMessage {
 	budget: string;
@@ -74,7 +67,6 @@ export const SetEmailMessage: FC<ISetEmailMessage> = ({
 				</Text>
 				<Text>Mysterious Spirit of Christmas Future</Text>
 			</VStack>
-			<Divider colorScheme="grey.800" />
 		</>
 	);
 };

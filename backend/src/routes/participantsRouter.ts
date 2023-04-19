@@ -1,32 +1,45 @@
+import { secretSantaLimiter } from "../middleware/rateLimiter";
+import { generateSecretSantaPairs } from "../mailer";
 import { Request, Response, Router } from "express";
 import { IParticipantDetails } from "../types";
-import { generateSecretSantaPairs } from "../mailer";
-export const participantsRouter = Router();
+import CryptoJs from "crypto-js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-participantsRouter.post("/send", (req: Request, res: Response) => {
-	try {
-		console.log(req.body);
-		const participantsDetails: IParticipantDetails[] =
-			req.body.participantsDetails;
-		const emailMessage: string = req.body.emailMessage;
-		const budget: string = req.body.budget;
+const participantsRouter = Router();
+const ENCRYPTION_PASSPHRASE: string = process.env.ENCRYPTION_PASSPHRASE!;
 
-		generateSecretSantaPairs(participantsDetails, emailMessage, budget);
+participantsRouter.post(
+	"/send",
+	secretSantaLimiter,
+	(req: Request, res: Response) => {
+		try {
+			const participantsDetailsBytes = CryptoJs.AES.decrypt(
+				req.body.participantsDetails,
+				ENCRYPTION_PASSPHRASE
+			);
+			const participantsDetails: IParticipantDetails[] = JSON.parse(
+				participantsDetailsBytes.toString(CryptoJs.enc.Utf8)
+			);
 
-		res.send({
-			status: 200,
-			message: "Participants' details received"
-		});
-	} catch (err: Error | unknown) {
-		console.log(err);
+			const emailMessage: string = req.body.emailMessage;
+			const budget: string = req.body.budget;
 
-		res.send({
-			status: 400,
-			message: err
-		});
+			generateSecretSantaPairs(participantsDetails, emailMessage, budget);
 
-		throw new Error(`Failed to get participant details: ${err}`);
+			res.send({
+				status: 200,
+				message: "Participants' details received!"
+			});
+		} catch (err: Error | unknown) {
+			res.send({
+				status: 400,
+				message: err
+			});
+
+			throw new Error(`Failed to get participant details: ${err}`);
+		}
 	}
-});
+);
 
 export default participantsRouter;

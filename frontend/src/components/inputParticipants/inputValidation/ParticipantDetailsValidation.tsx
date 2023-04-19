@@ -1,16 +1,19 @@
-import {
-	IParticipantDetails,
-	IParticipantDetailsValidation
-} from "../../../types";
-import { useInputUtils } from "../useInputUtils";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import { InputValidation, TextError } from "../../../styles";
-import { Input } from "@chakra-ui/react";
+import { useInputUtils } from "../utils/useInputUtils";
+import { IParticipantDetails } from "../../../types";
 import { FC } from "react";
+
+export interface IParticipantDetailsValidation {
+	control: Control<IParticipantDetails, any>;
+	participantDetailsKey: string;
+	errors: FieldErrors<IParticipantDetails>;
+	fieldName: "name" | "email" | "id";
+}
 
 export const ParticipantDetailsValidation: FC<
 	IParticipantDetailsValidation
-> = ({ control, inputValue, participantDetailsKey, errors, handleChange }) => {
+> = ({ control, participantDetailsKey, errors }) => {
 	const { formatPlaceholder } = useInputUtils();
 	const _participantDetailsKey =
 		participantDetailsKey as keyof IParticipantDetails;
@@ -26,14 +29,10 @@ export const ParticipantDetailsValidation: FC<
 						{...field}
 						placeholder={formatPlaceholder(participantDetailsKey)}
 						type="string"
-						value={inputValue}
-						onChange={(event) => {
-							field.onChange(event);
-							handleChange(
-								participantDetailsKey,
-								event.target.value
-							);
-						}}
+						value={field.value}
+						onChange={({ currentTarget: { value } }) =>
+							field.onChange(value)
+						}
 						color="primary.yellow"
 					/>
 					<TextError error={errorMessage} />

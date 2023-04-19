@@ -1,8 +1,10 @@
-import { MainBodyContainer } from "../../styles";
+import { ActiveUtilsProvider } from "../activeParticipants/utils/useActiveUtils";
+import { InputUtilsProvider } from "../inputParticipants/utils/useInputUtils";
 import { ActiveParticipants } from "../activeParticipants/ActiveParticipants";
 import { InputParticipants } from "../inputParticipants/InputParticipants";
-import { Stack, Image, Text, Button } from "@chakra-ui/react";
+import { Stack, Image, Text } from "@chakra-ui/react";
 import { SnowControllButton } from "../snowControl";
+import { MainBodyContainer } from "../../styles";
 
 export const AppMainBody = () => (
 	<>
@@ -19,11 +21,16 @@ export const AppMainBody = () => (
 				color="primary.yellow"
 				fontFamily="sans-serif"
 			>
-				Who are your Secret Santas?
+				Choose your Secret Santas
 			</Text>
 			<Stack direction="row" gap="100px">
-				<InputParticipants />
-				<ActiveParticipants />
+				<InputUtilsProvider>
+					<InputParticipants />
+				</InputUtilsProvider>
+
+				<ActiveUtilsProvider>
+					<ActiveParticipants />
+				</ActiveUtilsProvider>
 			</Stack>
 		</MainBodyContainer>
 	</>

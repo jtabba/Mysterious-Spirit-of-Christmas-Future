@@ -1,13 +1,14 @@
 import { HStack, Input, Text } from "@chakra-ui/react";
 import { joiResolver } from "@hookform/resolvers/joi";
-import Joi from "joi";
-import { Dispatch, SetStateAction, FC } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { Dispatch, SetStateAction, FC } from "react";
+import Joi from "joi";
 
 interface ISetBudget {
 	budget: string;
 	setBudget: Dispatch<SetStateAction<string>>;
 }
+
 interface IBudget {
 	budget: number;
 }
@@ -22,8 +23,7 @@ export const BudgetSchema = Joi.object<IBudget>({
 export const SetBudget: FC<ISetBudget> = ({ budget, setBudget }) => {
 	const {
 		control,
-		formState: { errors },
-		reset
+		formState: { errors }
 	} = useForm<IBudget>({
 		defaultValues: { budget: 25 },
 		resolver: joiResolver(BudgetSchema),

@@ -1,7 +1,7 @@
-import { Container, keyframes } from "@chakra-ui/react";
+import { useSecretSantaStore } from "../../store";
+import { Container } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { FC } from "react";
-import { useSecretSantaStore } from "../../store";
 
 type ISnowflakeStyle = {
 	animation: string;
@@ -24,6 +24,7 @@ export const AppSnowflakeBackground = () => {
 	const { snowRate } = useSecretSantaStore(({ snowRate }) => ({
 		snowRate
 	}));
+
 	const generateSnowflakes = (snowflakeDensity: number) => {
 		const snowflakes = new Array(snowflakeDensity).fill(0);
 		const snowflakeTypes = ["❄", "❅", "❆"];

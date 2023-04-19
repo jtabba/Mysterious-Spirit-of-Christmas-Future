@@ -1,17 +1,17 @@
-import { Stack, HStack, Text, Button } from "@chakra-ui/react";
-import { useActiveUtils } from "./useActiveUtils";
-import { DeleteParticipant } from "./DeleteParticipant";
-import { SubmissionAlertDialog } from "./SubmissionAlertDialog";
+import { SubmissionAlertDialog } from "./dialogOverlay/SubmissionAlertDialog";
 import { DividerYellow, MainBodySegment, TextMedium } from "../../styles";
+import { Stack, HStack, Text, Button } from "@chakra-ui/react";
+import { useActiveUtils } from "./utils/useActiveUtils";
+import { DeleteParticipant } from "./DeleteParticipant";
 
 export const ActiveParticipants = () => {
 	const {
-		isOpen,
-		participants,
+		participantsDetails,
 		isSubmitActive,
+		isOpen,
 		setOpen,
 		setClosed,
-		setParticipants
+		setParticipantsDetails
 	} = useActiveUtils();
 
 	return (
@@ -22,21 +22,21 @@ export const ActiveParticipants = () => {
 			<DividerYellow />
 
 			<Stack h="16rem" w="30rem" overflowY="scroll">
-				{participants.map(({ name, email, id }, index) => (
+				{participantsDetails.map(({ name, email, id }, index) => (
 					<HStack justifyContent="space-between" key={id}>
 						<Text fontSize="xl" color="primary.white">
 							{index + 1}) {name} ({email})
 						</Text>
 						<DeleteParticipant
 							participantId={id}
-							participants={participants}
-							setParticipants={setParticipants}
+							participants={participantsDetails}
+							setParticipants={setParticipantsDetails}
 						/>
 					</HStack>
 				))}
 			</Stack>
-			<DividerYellow />
 
+			<DividerYellow />
 			<Button
 				colorScheme="red"
 				size="md"

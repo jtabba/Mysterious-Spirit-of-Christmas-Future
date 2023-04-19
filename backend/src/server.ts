@@ -2,9 +2,8 @@ import participantsRouter from "./routes/participantsRouter";
 import express, { Application } from "express";
 import * as dotenv from "dotenv";
 import cors from "cors";
-import { generateSecretSantaPairs } from "./mailer";
 
-const PORT: string = process.env.PORT || "3001";
+const PORT: string = process.env.PORT || "8080";
 const app: Application = express();
 dotenv.config();
 
