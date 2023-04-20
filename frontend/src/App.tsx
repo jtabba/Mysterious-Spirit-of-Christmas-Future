@@ -4,7 +4,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import { customTheme } from "./theme/theme";
 import { render } from "react-dom";
-import "./App.css";
+import "./index.css";
 
 const App = () => {
 	const queryClient = new QueryClient();

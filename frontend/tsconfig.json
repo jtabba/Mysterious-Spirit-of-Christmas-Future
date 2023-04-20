@@ -16,5 +16,11 @@
 		"isolatedModules": true,
 		"jsx": "react-jsx"
 	},
-	"include": ["src", "services", "src/secretSantaService.ts"]
+	"include": [
+		"src",
+		"services",
+		"src/secretSantaService.ts",
+		"src/logo",
+		"src/custom.d.ts"
+	]
 }
