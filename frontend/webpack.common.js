@@ -16,9 +16,6 @@ module.exports = {
 			inject: true,
 			favicon: "src/logo/logo-color.svg"
 		}),
-		new HtmlWebpackInlineSVGPlugin({
-			runPreEmit: true
-		}),
 		new Dotenv()
 	],
 	module: {
@@ -36,7 +33,15 @@ module.exports = {
 
 			{
 				test: /\.svg$/,
-				loader: "svg-inline-loader?classPrefix"
+				use: [
+					{
+						loader: "svg-inline-loader",
+						options: {
+							limit: 1000,
+							name: "src/logo/[name].[ext]"
+						}
+					}
+				]
 			}
 		]
 	},
