@@ -27,16 +27,16 @@ export const secretSantaService = () => {
 	const postSecretSantaData = async (
 		requestBody: ISecretSantaPostBody
 	): Promise<AxiosResponse | null> => {
-		// const encryptedParticipantsDetails: EncryptedSecretSantaPostBody =
-		// 	encryptParticipantsDetails(requestBody.participantsDetails);
+		const encryptedParticipantsDetails: EncryptedSecretSantaPostBody =
+			encryptParticipantsDetails(requestBody.participantsDetails);
 
 		const response: AxiosResponse | null = await fetchData(
 			SecretSantaApiEndpoints.PostSecretSantas,
 			{
 				method: "POST",
 				body: JSON.stringify({
-					...requestBody
-					// participantsDetails: encryptedParticipantsDetails
+					...requestBody,
+					participantsDetails: encryptedParticipantsDetails
 				}),
 				headers: {
 					"Content-Type": "application/json"
