@@ -2,10 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const path = require("path");
 
-process.env.NODE_ENV = "development";
-
 module.exports = {
-	mode: "development",
 	target: "web",
 	devtool: "cheap-module-source-map",
 	entry: "./src/App.tsx",
@@ -22,7 +19,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "src/App.html",
+			template: "src/index.html",
 			favicon: "src/logo/logo-color.svg"
 		}),
 		new Dotenv()
@@ -42,6 +39,10 @@ module.exports = {
 			{
 				test: /(\.css)$/,
 				use: ["style-loader", "css-loader"]
+			},
+			{
+				test: /\.svg$/,
+				use: "file-loader"
 			}
 		]
 	},
