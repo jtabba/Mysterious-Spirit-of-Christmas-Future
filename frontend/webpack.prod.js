@@ -13,6 +13,7 @@ module.exports = merge(common, {
 		})
 	],
 	optimization: {
+		minimize: true,
 		minimizer: [
 			new OptimizeCssAssetsPlugin({
 				cssProcessorOptions: {
@@ -23,12 +24,7 @@ module.exports = merge(common, {
 				}
 			}),
 			new TerserPlugin({
-				// Use multi-process parallel running to improve the build speed
-				// Default number of concurrent runs: os.cpus().length - 1
-				parallel: true,
-				// Enable file caching
-				cache: true,
-				sourceMap: true
+				parallel: 4
 			})
 		]
 	},
