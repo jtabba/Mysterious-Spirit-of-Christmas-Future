@@ -31,9 +31,13 @@ module.exports = {
 				loader: "ts-loader"
 			},
 			{
-				test: /\.(woff|ttf|otf|eot|woff2|svg)$/i,
-				loader: "file-loader"
+				test: /\.(png|svg|jpg|jpeg|gif)$/i,
+				type: "asset/resource"
 			}
+			// {
+			// 	test: /\.(woff|ttf|otf|eot|woff2|svg)$/i,
+			// 	loader: "file-loader"
+			// }
 
 			// {
 			// 	test: /\.svg$/,
