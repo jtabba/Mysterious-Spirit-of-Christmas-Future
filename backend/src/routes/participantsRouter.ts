@@ -14,14 +14,15 @@ participantsRouter.post(
 	secretSantaLimiter,
 	(req: Request, res: Response) => {
 		try {
-			const participantsDetailsBytes = CryptoJs.AES.decrypt(
-				req.body.participantsDetails,
-				ENCRYPTION_PASSPHRASE
-			);
-			const participantsDetails: IParticipantDetails[] = JSON.parse(
-				participantsDetailsBytes.toString(CryptoJs.enc.Utf8)
-			);
+			// const participantsDetailsBytes = CryptoJs.AES.decrypt(
+			// 	req.body.participantsDetails,
+			// 	ENCRYPTION_PASSPHRASE
+			// );
+			// const participantsDetails: IParticipantDetails[] = JSON.parse(
+			// 	participantsDetailsBytes.toString(CryptoJs.enc.Utf8)
+			// );
 
+			const participantsDetails = req.body.participantsDetails;
 			const emailMessage: string = req.body.emailMessage;
 			const budget: string = req.body.budget;
 
