@@ -10,7 +10,7 @@ export const AppMainBody = () => (
 	<>
 		<Image
 			style={{ margin: "0 auto", width: "22rem", marginTop: "2rem" }}
-			src="../../logo/logo.svg"
+			src="../../logo/logo-color.svg"
 			alt=""
 		/>
 		<MainBodyContainer>
