@@ -1,0 +1,2 @@
+h1{font-size:100px}.Background{display:flex;justify-content:space-between;margin:0;padding:0;width:100%}.Snowflake{color:snow;display:inline-block;font-size:120px;margin:0;opacity:0;padding:0;width:.1%}@keyframes fall{0%{opacity:0}3%{opacity:.9}90%{opacity:.9}to{opacity:0;transform:translateY(97vh)}}
+/*# sourceMappingURL=main.7edb47046f805b05d12c.css.map */
