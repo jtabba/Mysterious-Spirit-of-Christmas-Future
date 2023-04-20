@@ -1,5 +1,6 @@
 import { ISecretSantaRequest } from "./secretSantaService/types";
-import { API_URL } from "../src/constants";
+// import { API_URL } from "../src/constants";
+const API_URL: string = "https://msocf.fly.dev";
 import axios from "axios";
 
 axios.defaults.baseURL = API_URL;
