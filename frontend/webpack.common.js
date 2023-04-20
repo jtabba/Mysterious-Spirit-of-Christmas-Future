@@ -1,4 +1,3 @@
-const HtmlWebpackInlineSVGPlugin = require("html-webpack-inline-svg-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const path = require("path");
@@ -37,7 +36,7 @@ module.exports = {
 
 			{
 				test: /\.svg$/,
-				use: "file-loader"
+				loader: "svg-inline-loader?classPrefix"
 			}
 		]
 	},
