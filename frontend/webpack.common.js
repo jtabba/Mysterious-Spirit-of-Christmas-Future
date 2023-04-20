@@ -14,7 +14,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "src", "index.html"),
 			inject: true,
-			favicon: "src/logo/logo-color.svg"
+			favicon: "src/logo/logo.svg"
 		}),
 		new Dotenv()
 	],
@@ -30,19 +30,23 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: "ts-loader"
 			},
-
 			{
-				test: /\.svg$/,
-				use: [
-					{
-						loader: "svg-inline-loader",
-						options: {
-							limit: 1000,
-							name: "src/logo/[name].[ext]"
-						}
-					}
-				]
+				test: /\.(woff|ttf|otf|eot|woff2|svg)$/i,
+				loader: "file-loader"
 			}
+
+			// {
+			// 	test: /\.svg$/,
+			// 	use: [
+			// 		{
+			// 			loader: "svg-inline-loader",
+			// 			options: {
+			// 				limit: 1000,
+			// 				name: "src/logo/[name].[ext]"
+			// 			}
+			// 		}
+			// 	]
+			// }
 		]
 	},
 	resolve: {
