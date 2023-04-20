@@ -77,6 +77,4 @@ export const generateSecretSantaPairs = async (
 			}
 		});
 	}
-
-	console.log("All Secret Santa's sent");
 };
