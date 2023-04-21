@@ -77,7 +77,7 @@ export const useActiveUtils = () => {
 	const context = useContext(UtilsContext);
 
 	if (!context) {
-		throw new Error("AtiveUtilsProvider must be used");
+		throw new Error("ActiveUtilsProvider must be used");
 	}
 
 	return context;
