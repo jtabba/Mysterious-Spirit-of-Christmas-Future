@@ -29,7 +29,8 @@ participantsRouter.post(
 
 			res.send({
 				status: 200,
-				message: "Participants' details received!"
+				message:
+					"Participants' details received! Thank you for using Mysterious Spirit of Christmas Future"
 			});
 		} catch (err: Error | unknown) {
 			res.send({
