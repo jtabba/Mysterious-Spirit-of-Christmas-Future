@@ -1,5 +1,5 @@
-// import { ENCRYPTION_PASSPHRASE } from "../../src/constants";
-const ENCRYPTION_PASSPHRASE: string = process.env.ENCRYPTION_PASSPHRASE!;
+import { ENCRYPTION_PASSPHRASE } from "../../src/constants";
+// const ENCRYPTION_PASSPHRASE: string = process.env.ENCRYPTION_PASSPHRASE!;
 import { IParticipantDetails } from "../../src/types";
 import { useAxios } from "../fetchData";
 import { AxiosResponse } from "axios";

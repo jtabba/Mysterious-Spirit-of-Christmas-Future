@@ -7,7 +7,8 @@ import { AxiosError } from "axios";
 
 const useSecretSantaService = () => {
 	const { postSecretSantaData } = secretSantaService();
-	const { setIsLoading, setClosed } = useActiveUtils();
+	const { setIsLoading, setClosed, setParticipantsDetails } =
+		useActiveUtils();
 	const { renderNotification } = useNotification();
 
 	const createSecretSantaDataMutation = useMutation(
@@ -20,6 +21,7 @@ const useSecretSantaService = () => {
 			onSuccess: (response: any) => {
 				setIsLoading(false);
 				setClosed();
+				setParticipantsDetails([]);
 
 				renderNotification(response.data);
 			},
