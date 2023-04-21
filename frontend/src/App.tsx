@@ -14,7 +14,9 @@ const App = () => {
 			<AppSnowflakeBackground />
 			<ChakraProvider theme={customTheme}>
 				<QueryClientProvider client={queryClient}>
-					<AppMainBody />
+					<Box maxWidth="80%" maxHeight="80%">
+						<AppMainBody />
+					</Box>
 				</QueryClientProvider>
 			</ChakraProvider>
 		</Box>
