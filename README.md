@@ -71,7 +71,7 @@ Pretty straightforward:
 
 -   Background will shift when adding a participant
 -   UI is not centered on mobile
--   Nothing else because I want to pretend that my coding is bullet proof
+-   Nothing else because I like to pretend that my coding is bullet proof
 
 ### NOTE
 
