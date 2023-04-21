@@ -42,7 +42,8 @@ export const ActiveUtilsProvider: FC<WithChildren> = ({ children }) => {
 	const defaultEmailMessage =
 		"Let's see what kind of exciting gift you can find them!";
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const isSubmitActive = participantsDetails.length <= 1;
+	const isSubmitActive =
+		participantsDetails.length <= 1 || participantsDetails.length > 50;
 	const [budget, setBudget] = useState<string>("25");
 	const cancelRef = useRef<HTMLButtonElement>(null);
 	const [emailMessage, setEmailMessage] =
