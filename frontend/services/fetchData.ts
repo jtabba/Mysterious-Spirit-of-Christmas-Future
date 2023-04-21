@@ -1,6 +1,5 @@
 import { ISecretSantaRequest } from "./secretSantaService/types";
 import { API_URL } from "../src/constants";
-// const API_URL: string = process.env.API_URL!;
 import axios from "axios";
 
 axios.defaults.baseURL = API_URL;
