@@ -14,7 +14,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "src", "index.html"),
 			inject: true,
-			favicon: "src/logo/logo.svg"
+			favicon: "src/images/logo.svg"
 		}),
 		new Dotenv()
 	],
