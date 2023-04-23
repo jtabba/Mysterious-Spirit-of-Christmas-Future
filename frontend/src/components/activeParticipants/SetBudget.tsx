@@ -45,14 +45,14 @@ export const SetBudget: FC<ISetBudget> = ({ budget, setBudget }) => {
 							<Text fontSize="xl">$</Text>
 							<Input
 								{...field}
-								type="string"
+								type="number"
 								value={budget}
 								placeholder="Budget"
 								size="lg"
 								padding={5}
 								maxWidth={100}
 								onChange={(event) => {
-									field.onChange(event);
+									field.onChange(event.currentTarget.value);
 									setBudget(event.currentTarget.value);
 								}}
 							/>
