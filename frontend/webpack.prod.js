@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const common = require("./webpack.common.js");
 const { merge } = require("webpack-merge");
-// const Dotenv = require("dotenv-webpack");
+const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -14,7 +14,8 @@ module.exports = merge(common, {
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: "[name].[contenthash].css"
-		})
+		}),
+		new Dotenv()
 		// new webpack.DefinePlugin({
 		// 	API_URL: JSON.stringify(process.env.API_URL),
 		// 	ENCRYPTION_PASSPHRASE: JSON.stringify(

@@ -21,10 +21,12 @@ module.exports = {
 			favicon: "src/images/logo.svg"
 		}),
 		new webpack.DefinePlugin({
-			API_URL: JSON.stringify(process.env.API_URL),
-			ENCRYPTION_PASSPHRASE: JSON.stringify(
-				process.env.ENCRYPTION_PASSPHRASE
-			)
+			"process.env": {
+				API_URL: JSON.stringify(process.env.API_URL),
+				ENCRYPTION_PASSPHRASE: JSON.stringify(
+					process.env.ENCRYPTION_PASSPHRASE
+				)
+			}
 		})
 	],
 	module: {
