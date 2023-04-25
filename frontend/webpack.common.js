@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
-var dotenv = require("dotenv");
+const dotenv = require("dotenv");
 const path = require("path");
 
 module.exports = {
@@ -19,12 +19,6 @@ module.exports = {
 		}),
 		new webpack.DefinePlugin({
 			"process.env": JSON.stringify(dotenv.config().parsed)
-			// {
-			// API_URL: JSON.stringify(process.env.API_URL),
-			// ENCRYPTION_PASSPHRASE: JSON.stringify(
-			// 	process.env.ENCRYPTION_PASSPHRASE
-			// )
-			// }
 		})
 	],
 	module: {
