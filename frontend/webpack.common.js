@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const webpack = require("webpack");
 // const dotenv = require("dotenv");
+const Dotenv = require("dotenv-webpack");
 const path = require("path");
 
 module.exports = {
@@ -16,10 +17,8 @@ module.exports = {
 			template: path.resolve(__dirname, "src", "index.html"),
 			inject: true,
 			favicon: "src/images/logo.svg"
-		})
-		// new webpack.DefinePlugin({
-		// 	"process.env": JSON.stringify(dotenv.config().parsed)
-		// })
+		}),
+		new Dotenv()
 	],
 	module: {
 		rules: [
