@@ -32,6 +32,7 @@ export const checkForXss = (
 		.find((emailWord) => urlKeywordFilter.includes(emailWord));
 
 	if (sanitisedEmailMessage !== message || urlKeyword !== undefined) {
+		console.log(`XSS attack attempted from ${userIp}`);
 		if (xssWatchlist.has(userIp)) {
 			const xssAttempts = xssWatchlist.get(userIp)! + 1;
 

@@ -10,7 +10,6 @@ const xssWatchlist: Map<string, number> = new Map(); // Let's pretend I'm using 
 const blacklistedIps: Set<string> = new Set(); /// ...This one too
 const participantsRouter = Router();
 
-blacklistedIps.add("::1");
 participantsRouter.post(
 	"/send",
 	secretSantaLimiter,
