@@ -14,13 +14,13 @@ module.exports = merge(common, {
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: "[name].[contenthash].css"
-		}),
-		new webpack.DefinePlugin({
-			API_URL: JSON.stringify(process.env.API_URL),
-			ENCRYPTION_PASSPHRASE: JSON.stringify(
-				process.env.ENCRYPTION_PASSPHRASE
-			)
 		})
+		// new webpack.DefinePlugin({
+		// 	API_URL: JSON.stringify(process.env.API_URL),
+		// 	ENCRYPTION_PASSPHRASE: JSON.stringify(
+		// 		process.env.ENCRYPTION_PASSPHRASE
+		// 	)
+		// })
 	],
 	optimization: {
 		minimize: true,
