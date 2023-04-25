@@ -16,10 +16,10 @@ module.exports = {
 			template: path.resolve(__dirname, "src", "index.html"),
 			inject: true,
 			favicon: "src/images/logo.svg"
-		}),
-		new webpack.DefinePlugin({
-			"process.env": JSON.stringify(dotenv.config().parsed)
 		})
+		// new webpack.DefinePlugin({
+		// 	"process.env": JSON.stringify(dotenv.config().parsed)
+		// })
 	],
 	module: {
 		rules: [
