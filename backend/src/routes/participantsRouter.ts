@@ -1,36 +1,54 @@
 import { secretSantaLimiter } from "../middleware/rateLimiter";
+import { checkForXss, getRequestData } from "./utils.ts";
 import { generateSecretSantaPairs } from "../mailer";
 import { Request, Response, Router } from "express";
-import { IParticipantDetails } from "../types";
-import CryptoJs from "crypto-js";
 import * as dotenv from "dotenv";
 dotenv.config();
 
+const API_PASSWORD: string = process.env.API_PASSWORD!;
+const xssWatchlist: Map<string, number> = new Map(); // Let's pretend I'm using an actual database for this variable
+const blacklistedIps: Set<string> = new Set(); /// ...This one too
 const participantsRouter = Router();
-const ENCRYPTION_PASSPHRASE: string = process.env.ENCRYPTION_PASSPHRASE!;
 
 participantsRouter.post(
 	"/send",
 	secretSantaLimiter,
 	(req: Request, res: Response) => {
 		try {
-			const participantsDetailsBytes = CryptoJs.AES.decrypt(
-				req.body.participantsDetails,
-				ENCRYPTION_PASSPHRASE
+			const userIp: string = req.socket.remoteAddress!;
+
+			if (blacklistedIps.has(userIp)) {
+				return res.send({
+					status: 401,
+					message: "You have been banned for abusing our service"
+				});
+			}
+
+			const { participantsDetails, emailMessage, budget } =
+				getRequestData(req.body);
+
+			const {
+				messageContainsXss,
+				sanitisedEmailMessage,
+				responseMessage
+			} = checkForXss(emailMessage, userIp, xssWatchlist, blacklistedIps);
+
+			if (messageContainsXss) {
+				return res.send({
+					status: 400,
+					message: responseMessage
+				});
+			}
+
+			generateSecretSantaPairs(
+				participantsDetails,
+				sanitisedEmailMessage,
+				budget
 			);
-			const participantsDetails: IParticipantDetails[] = JSON.parse(
-				participantsDetailsBytes.toString(CryptoJs.enc.Utf8)
-			);
 
-			const emailMessage: string = req.body.emailMessage;
-			const budget: string = req.body.budget;
-
-			generateSecretSantaPairs(participantsDetails, emailMessage, budget);
-
-			res.send({
+			return res.send({
 				status: 200,
-				message:
-					"Participants' details received! Thank you for using Mysterious Spirit of Christmas Future"
+				message: responseMessage
 			});
 		} catch (err: Error | unknown) {
 			res.send({
@@ -39,6 +57,35 @@ participantsRouter.post(
 			});
 
 			throw new Error(`Failed to get participant details: ${err}`);
+		}
+	}
+);
+
+participantsRouter.post(
+	"/getBlacklistedIpAddresses",
+	secretSantaLimiter,
+	(req: Request, res: Response) => {
+		try {
+			const authAttempt = req.body.password;
+
+			if (authAttempt !== API_PASSWORD) {
+				return res.send({
+					status: 403,
+					message: "The fuck you doin' here son"
+				});
+			}
+
+			return res.send({
+				status: 200,
+				message: [...blacklistedIps]
+			});
+		} catch (err: Error | unknown) {
+			res.send({
+				status: 400,
+				message: err
+			});
+
+			throw new Error(`Failed to get data: ${err}`);
 		}
 	}
 );

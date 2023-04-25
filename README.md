@@ -24,7 +24,7 @@ This web app enables users to automatically pair someone to a random secret sant
 
 I created this application with the intent of putting my development skills to the test. I have spent a significant amount of time in my current role working on the front-end and have been very happy with how far my skills have come.
 
-The underlying notion was that whatever I made would be suitable for commercial use and easily scalable if required (not that that is likely, this was all in the name of practice). Additionally, I was intent on creating source code that was clean, easy to understand, and implemented React/commercial best practices. All components/hooks were created with the aim of being as loosely coupled as possible, and modulated to allow for easy reusibility.
+The underlying notion was that whatever I made would follow commercial standards and be easily scalable if required (not that that is likely, this was all in the name of practice). Additionally, I was intent on creating source code that was clean, easy to understand, and implemented React/commercial best practices. All components/hooks were created with the aim of being as loosely coupled as possible, and modulated to allow for easy reusibility.
 
 Some exmaples include:
 
@@ -39,12 +39,13 @@ Some exmaples include:
 -   Custom types for readibility
 -   Thorough error handling (displayed via a notification if thrown)
 -   Using Maps instead of objects where applicable (namely in the pairing algorithm (mailer/index.ts) for greater efficiency when accessing the dictionaries keys)
+-   Implementing security features against DDoS (rate limiting), MITM attack (encryption), and XSS (sanitisation, removal of URLs and IP bans for repeated attempts)
 
 UI design is definitely not my strongest asset, but I wanted to maintain a light-hearted and Christmas themed interface without letting things get out of hand.
 
 I also started the project as a bare-bones Web-pack repo. I gained a wealth of knowledge from setting up, debugging and using Web-pack (and some mild anger issues from the frustration)
 
-Although it is not 100% what would be considerd commercial ready, I am satisfied with where it is at for the sake of this task.
+Although it is not 100% what would be considerd commercial ready, I am satisfied with where it is at (and how much I have learned) for the sake of this task.
 
 ### Features
 

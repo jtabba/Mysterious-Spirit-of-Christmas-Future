@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+var dotenv = require("dotenv");
 const path = require("path");
 
 module.exports = {
@@ -17,12 +18,13 @@ module.exports = {
 			favicon: "src/images/logo.svg"
 		}),
 		new webpack.DefinePlugin({
-			"process.env": {
-				API_URL: JSON.stringify(process.env.API_URL),
-				ENCRYPTION_PASSPHRASE: JSON.stringify(
-					process.env.ENCRYPTION_PASSPHRASE
-				)
-			}
+			"process.env": JSON.stringify(dotenv.config().parsed)
+			// {
+			// API_URL: JSON.stringify(process.env.API_URL),
+			// ENCRYPTION_PASSPHRASE: JSON.stringify(
+			// 	process.env.ENCRYPTION_PASSPHRASE
+			// )
+			// }
 		})
 	],
 	module: {
