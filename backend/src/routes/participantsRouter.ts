@@ -91,7 +91,7 @@ participantsRouter.post(
 );
 
 participantsRouter.post(
-	"/unbanIp",
+	"/unbanSillyScripter",
 	secretSantaLimiter,
 	(req: Request, res: Response) => {
 		try {
@@ -101,9 +101,24 @@ participantsRouter.post(
 			if (authAttempt !== API_PASSWORD) {
 				return res.send({
 					status: 403,
-					message: "The fuck you doin' here son"
+					message:
+						"If you want to be unbanned all you have to do is ask nicely..."
 				});
 			}
+
+			if (blacklistedIps.has(ipToUnban)!) {
+				return res.send({
+					status: 400,
+					message: `${ipToUnban} is not blacklisted`
+				});
+			}
+
+			blacklistedIps.delete(ipToUnban);
+
+			return res.send({
+				status: 200,
+				message: `${ipToUnban} has been unbanned`
+			});
 		} catch (err: Error | unknown) {}
 	}
 );
