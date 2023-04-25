@@ -1,10 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
-// var dotenv = require("dotenv");
-// const Dotenv = require("dotenv-webpack");
+const Dotenv = require("dotenv-webpack");
 const path = require("path");
-const dotenv = require("dotenv");
-dotenv.config();
 
 module.exports = {
 	entry: "./src/App.tsx",
@@ -20,14 +16,7 @@ module.exports = {
 			inject: true,
 			favicon: "src/images/logo.svg"
 		}),
-		new webpack.DefinePlugin({
-			"process.env": {
-				API_URL: JSON.stringify(process.env.API_URL),
-				ENCRYPTION_PASSPHRASE: JSON.stringify(
-					process.env.ENCRYPTION_PASSPHRASE
-				)
-			}
-		})
+		new Dotenv()
 	],
 	module: {
 		rules: [
