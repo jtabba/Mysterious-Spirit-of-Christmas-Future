@@ -1,5 +1,7 @@
 const common = require("./webpack.common.js");
 const { merge } = require("webpack-merge");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
 const path = require("path");
 
 module.exports = merge(common, {
@@ -12,6 +14,11 @@ module.exports = merge(common, {
 		hot: "only",
 		compress: true
 	},
+	plugins: [
+		new webpack.DefinePlugin({
+			"process.env": JSON.stringify(dotenv.config().parsed)
+		})
+	],
 	module: {
 		rules: [
 			{
