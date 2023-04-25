@@ -3,6 +3,8 @@ const webpack = require("webpack");
 // var dotenv = require("dotenv");
 // const Dotenv = require("dotenv-webpack");
 const path = require("path");
+const dotenv = require("dotenv");
+dotenv.config();
 
 module.exports = {
 	entry: "./src/App.tsx",

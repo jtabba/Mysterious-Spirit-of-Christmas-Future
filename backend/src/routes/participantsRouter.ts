@@ -10,6 +10,7 @@ const xssWatchlist: Map<string, number> = new Map(); // Let's pretend I'm using 
 const blacklistedIps: Set<string> = new Set(); /// ...This one too
 const participantsRouter = Router();
 
+blacklistedIps.add("::1");
 participantsRouter.post(
 	"/send",
 	secretSantaLimiter,
@@ -96,7 +97,9 @@ participantsRouter.post(
 	(req: Request, res: Response) => {
 		try {
 			const authAttempt = req.body.password;
-			const ipToUnban = req.body.ip;
+			const ipToUnban = req.body.ip.toString();
+
+			console.log(typeof ipToUnban);
 
 			if (authAttempt !== API_PASSWORD) {
 				return res.send({
@@ -106,9 +109,7 @@ participantsRouter.post(
 				});
 			}
 
-			console.log(blacklistedIps, ipToUnban);
-
-			if (blacklistedIps.has(ipToUnban)!) {
+			if (blacklistedIps.has(ipToUnban) === false) {
 				return res.send({
 					status: 400,
 					message: `${ipToUnban} is not blacklisted`
