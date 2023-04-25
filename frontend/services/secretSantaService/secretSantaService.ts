@@ -1,4 +1,4 @@
-import { API_URL, ENCRYPTION_PASSPHRASE } from "../../src/constants";
+import { ENCRYPTION_PASSPHRASE } from "../../src/constants";
 import { IParticipantDetails } from "../../src/types";
 import { useAxios } from "../fetchData";
 import { AxiosResponse } from "axios";
@@ -28,8 +28,6 @@ export const secretSantaService = () => {
 	): Promise<AxiosResponse | null> => {
 		const encryptedParticipantsDetails: EncryptedSecretSantaPostBody =
 			encryptParticipantsDetails(requestBody.participantsDetails);
-
-		console.log(ENCRYPTION_PASSPHRASE, API_URL);
 
 		const response: AxiosResponse | null = await fetchData(
 			SecretSantaApiEndpoints.PostSecretSantas,

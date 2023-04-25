@@ -106,6 +106,8 @@ participantsRouter.post(
 				});
 			}
 
+			console.log(blacklistedIps, ipToUnban);
+
 			if (blacklistedIps.has(ipToUnban)!) {
 				return res.send({
 					status: 400,
