@@ -90,4 +90,22 @@ participantsRouter.post(
 	}
 );
 
+participantsRouter.post(
+	"/unbanIp",
+	secretSantaLimiter,
+	(req: Request, res: Response) => {
+		try {
+			const authAttempt = req.body.password;
+			const ipToUnban = req.body.ip;
+
+			if (authAttempt !== API_PASSWORD) {
+				return res.send({
+					status: 403,
+					message: "The fuck you doin' here son"
+				});
+			}
+		} catch (err: Error | unknown) {}
+	}
+);
+
 export default participantsRouter;

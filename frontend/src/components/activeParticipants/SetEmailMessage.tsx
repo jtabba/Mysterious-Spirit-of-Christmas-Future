@@ -15,16 +15,6 @@ export const SetEmailMessage: FC<ISetEmailMessage> = ({
 	setEmailMessage
 }) => {
 	const [isCustomMessage, setIsCustomMessage] = useState<boolean>(false);
-	const sanitiseCustomEmail = (value: string) => {
-		const xssMatch =
-			/[<]*<[\s\u200B]*script[\s\u200B]*>.*[/]*[<]*<[\s\u200B]*\/[\s\u200B]*script[\s\u200B]*>/gi;
-
-		const res = value.match(xssMatch);
-
-		console.log(res);
-
-		// RACE CONDITIONS FOR HERE AND DEFAULT EMAIL
-	};
 
 	useEffect(() => {
 		setEmailMessage(defaultEmailMessage);
@@ -64,10 +54,9 @@ export const SetEmailMessage: FC<ISetEmailMessage> = ({
 						variant="filled"
 						size="md"
 						value={emailMessage}
-						onChange={(event) => {
-							sanitiseCustomEmail(event.currentTarget.value);
-							setEmailMessage(event.currentTarget.value);
-						}}
+						onChange={(event) =>
+							setEmailMessage(event.currentTarget.value)
+						}
 					/>
 				) : (
 					<Text>{defaultEmailMessage}</Text>
