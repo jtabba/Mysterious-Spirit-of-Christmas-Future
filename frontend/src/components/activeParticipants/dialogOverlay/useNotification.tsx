@@ -16,7 +16,7 @@ export const useNotification = () => {
 		return responseNotification({
 			position: "top-right",
 			isClosable: true,
-			duration: 10000,
+			duration: 6000,
 			render: () => (
 				<Box
 					color="white"

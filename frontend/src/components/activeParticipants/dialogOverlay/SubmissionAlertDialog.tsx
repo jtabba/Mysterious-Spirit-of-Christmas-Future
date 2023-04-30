@@ -1,4 +1,4 @@
-import { useSecretSantaService } from "../../../../services/secretSantaService/useSecretSantaService";
+import { useSecretSantaService } from "../../../services/secretSantaService/useSecretSantaService";
 import { useActiveUtils } from "../utils/useActiveUtils";
 import { SetEmailMessage } from "../SetEmailMessage";
 import { SpinnerYellow } from "../../../styles";
@@ -35,6 +35,13 @@ export const SubmissionAlertDialog: FC<ISubmissionAlertDialog> = ({
 		setEmailMessage
 	} = useActiveUtils();
 	const { postParticipantsDetails } = useSecretSantaService();
+	const handleSubmit = () => {
+		postParticipantsDetails({
+			participantsDetails,
+			emailMessage,
+			budget
+		});
+	};
 
 	return (
 		<AlertDialog
@@ -93,12 +100,7 @@ export const SubmissionAlertDialog: FC<ISubmissionAlertDialog> = ({
 								colorScheme="green"
 								onClick={(event) => {
 									event.preventDefault();
-
-									postParticipantsDetails({
-										participantsDetails,
-										emailMessage,
-										budget
-									});
+									handleSubmit();
 								}}
 								ml={3}
 								isDisabled={Number(budget) <= 0}

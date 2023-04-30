@@ -1,5 +1,5 @@
-import { useNotification } from "../../src/components/activeParticipants/dialogOverlay/useNotification";
-import { useActiveUtils } from "../../src/components/activeParticipants/utils/useActiveUtils";
+import { useNotification } from "../../components/activeParticipants/dialogOverlay/useNotification";
+import { useActiveUtils } from "../../components/activeParticipants/utils/useActiveUtils";
 import { secretSantaService } from "./secretSantaService";
 import { ISecretSantaPostBody } from "./types";
 import { useMutation } from "react-query";

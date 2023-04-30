@@ -18,7 +18,7 @@
 	},
 	"include": [
 		"src",
-		"services",
+		"src/services",
 		"src/secretSantaService.ts",
 		"src/logo",
 		"src/custom.d.ts"

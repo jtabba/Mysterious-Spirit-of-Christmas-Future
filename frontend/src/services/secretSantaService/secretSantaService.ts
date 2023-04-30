@@ -1,27 +1,24 @@
-import { ENCRYPTION_PASSPHRASE } from "../../src/constants";
-import { IParticipantDetails } from "../../src/types";
+import { EncryptedSecretSantaPostBody, ISecretSantaPostBody } from "./types";
+import { ENCRYPTION_PASSPHRASE } from "../../constants";
+import { SecretSantaApiEndpoints } from "./endpoints";
+import { IParticipantDetails } from "../../types";
 import { useAxios } from "../fetchData";
 import { AxiosResponse } from "axios";
 import CryptoJs from "crypto-js";
-import {
-	EncryptedSecretSantaPostBody,
-	SecretSantaApiEndpoints,
-	ISecretSantaPostBody
-} from "./types";
+
+const encryptParticipantsDetails = (
+	participantsDetails: IParticipantDetails[]
+) => {
+	const encryptedParticipantsDetails = CryptoJs.AES.encrypt(
+		JSON.stringify(participantsDetails),
+		ENCRYPTION_PASSPHRASE
+	).toString();
+
+	return encryptedParticipantsDetails;
+};
 
 export const secretSantaService = () => {
 	const { fetchData } = useAxios();
-
-	const encryptParticipantsDetails = (
-		participantsDetails: IParticipantDetails[]
-	) => {
-		const encryptedParticipantsDetails = CryptoJs.AES.encrypt(
-			JSON.stringify(participantsDetails),
-			ENCRYPTION_PASSPHRASE
-		).toString();
-
-		return encryptedParticipantsDetails;
-	};
 
 	const postSecretSantaData = async (
 		requestBody: ISecretSantaPostBody
@@ -30,7 +27,7 @@ export const secretSantaService = () => {
 			encryptParticipantsDetails(requestBody.participantsDetails);
 
 		const response: AxiosResponse | null = await fetchData(
-			SecretSantaApiEndpoints.PostSecretSantas,
+			SecretSantaApiEndpoints.SendSecretSantas,
 			{
 				method: "POST",
 				body: JSON.stringify({
