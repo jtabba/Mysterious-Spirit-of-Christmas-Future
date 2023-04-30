@@ -40,7 +40,7 @@ class SecretSantaController {
 			throw new Error(`Failed to get blacklisted IPs: ${err}`);
 		}
 	}
-
+	// refactor
 	removeBlacklistedIp(req: Request, res: Response) {
 		try {
 			const response = secretSantaService.removeBlacklistedIp(
