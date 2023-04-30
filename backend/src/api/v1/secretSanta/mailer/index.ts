@@ -1,4 +1,4 @@
-import { IParticipantDetails } from "../types";
+import { IParticipantDetails } from "../../../../types.ts";
 import { transporter, generateMailOptions } from "./utils.ts";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -27,7 +27,7 @@ const generateDataStructures = (participantsDetails: IParticipantDetails[]) => {
 	};
 };
 
-export const generateSecretSantaPairs = async (
+export const createPairsAndSendEmails = async (
 	participantsDetails: IParticipantDetails[],
 	emailMessage: string,
 	budget: string

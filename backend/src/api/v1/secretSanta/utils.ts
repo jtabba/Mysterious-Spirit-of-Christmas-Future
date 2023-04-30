@@ -1,4 +1,4 @@
-import { IParticipantDetails } from "../types";
+import { IParticipantDetails } from "../../..//types";
 import CryptoJs from "crypto-js";
 import * as dotenv from "dotenv";
 import xss from "xss";
