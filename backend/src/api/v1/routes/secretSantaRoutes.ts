@@ -1,5 +1,5 @@
-import SecretSantaController from "../secretSanta/controllers/secretSantaController.ts";
-import { secretSantaLimiter } from "../secretSanta/middleware/rateLimiter.ts";
+import SecretSantaController from "../secretSanta/controllers/secretSantaController";
+import { secretSantaLimiter } from "../secretSanta/middleware/rateLimiter";
 import * as dotenv from "dotenv";
 import express from "express";
 dotenv.config();

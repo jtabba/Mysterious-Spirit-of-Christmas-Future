@@ -1,5 +1,5 @@
-import { IParticipantDetails } from "../../../../types.ts";
-import { transporter, generateMailOptions } from "./utils.ts";
+import { IParticipantDetails } from "../../../../types";
+import { transporter, generateMailOptions } from "./utils";
 import * as dotenv from "dotenv";
 dotenv.config();
 

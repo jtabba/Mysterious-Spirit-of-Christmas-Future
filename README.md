@@ -15,6 +15,7 @@ This web app enables users to automatically pair someone to a random secret sant
 -   React
 -   Axios
 -   Chakra UI Library
+-   React
 -   React-query
 -   Web-pack
 -   Rate-limiter

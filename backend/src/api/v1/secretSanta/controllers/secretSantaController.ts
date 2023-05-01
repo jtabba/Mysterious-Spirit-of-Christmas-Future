@@ -1,4 +1,4 @@
-import SecretSantaService from "../services/secretSantaService.ts";
+import SecretSantaService from "../services/secretSantaService";
 import { Request, Response } from "express";
 import * as dotenv from "dotenv";
 dotenv.config();

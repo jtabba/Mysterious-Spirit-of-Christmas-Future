@@ -6,12 +6,18 @@
 		"esModuleInterop": true,
 		"lib": ["es2021"],
 		"module": "ES6",
-		"moduleResolution": "node",
-		"rootDir": "./src",
-		"outDir": "./dist",
-		"noEmit": true,
+		"moduleResolution": "Node",
+		"rootDir": "src",
+		"outDir": "build",
 		"strict": true,
-		"allowImportingTsExtensions": true
+		"noImplicitAny": true,
+		"declaration": true,
+		"resolveJsonModule": true
 	},
-	"exclude": ["./node_modules"]
+	"ts-node": {
+		"esm": true,
+		"experimentalSpecifierResolution": "node"
+	},
+	"include": ["/**/*.ts"],
+	"exclude": ["./node_modules", "./build"]
 }

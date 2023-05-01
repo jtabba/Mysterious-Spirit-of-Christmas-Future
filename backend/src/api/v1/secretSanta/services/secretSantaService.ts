@@ -1,4 +1,4 @@
-import { checkForXss, getRequestData } from "../utils.ts";
+import { checkForXss, getRequestData } from "../utils";
 import { createPairsAndSendEmails } from "../mailer";
 import * as dotenv from "dotenv";
 dotenv.config();
